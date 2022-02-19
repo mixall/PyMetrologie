@@ -1,6 +1,6 @@
 # PyMetrologie
 
-Flask app for keeping records of measuring instruments. k
+Flask app for keeping records of measuring instruments.
 
 - ER diagram: https://github.com/mixall/PyMetrologie/blob/master/PyMetrologie_ER_diagram.jpg
 
