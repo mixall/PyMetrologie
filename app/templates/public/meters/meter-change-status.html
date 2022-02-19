@@ -1,0 +1,36 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Zařízení - změna stavu
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Zařízení</h1>
+        {% if item.status == True %}
+            <p><a href="{{ url_for('device_list') }}">Aktivní zařízení (seznam)</a></p>
+            <hr>
+            <h4>Opravdu chcete deaktivovat zařízení <strong>{{ item.name }}?</strong></h4>
+	  	{% else %}
+            <p><a href="{{ url_for('device_list', filters='inactive')}}">Neaktivní zařízení (seznam)</a></p>
+            <hr>
+            <h4>Opravdu chcete aktivovat zařízení <strong>{{ item.name }}?</strong></h4>
+	  	{% endif %}
+
+        <br>
+
+        <form action="/device/status/{{item.id}}" method="POST">
+        <button type="submit" class="btn btn-primary" name="choice" value="storno">Storno</button>
+        <button type="submit" class="btn btn-secondary" name="choice" value="change_status">Ano</button>
+
+        {% if zpetnavazba %}
+          <p class="text-danger float-right">{{ zpetnavazba }}</p>
+        {% endif %}
+        </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Zařízení - seznam
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Zařízení</h1>
+        <p><a href="{{ url_for('device_add') }}">Nové zařízení</a></p>
+        {% if status == False %}
+            <p><a href="{{ url_for('device_list') }}">Aktivní zařízení (seznam)</a></p>
+            <hr>
+            <h4>Seznam neaktivních zařízení</h4>
+	  	{% else %}
+	  		<p><a href="{{ url_for('device_list', filters='inactive')}}">Neaktivní zařízení (seznam)</a></p>
+            <hr>
+            <h4>Seznam aktivních zařízení</h4>
+	  	{% endif %}
+
+      {{ table }}
+    </div>
+  </div>
+</div>
+{% endblock %}

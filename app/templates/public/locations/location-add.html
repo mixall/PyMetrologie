@@ -1,0 +1,47 @@
+{% extends "public/templates/public_template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Lokace - nová lokace
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Lokace měřidel</h1>
+      <p><a href="{{ url_for('location_add') }}">Nová lokace</a></p>
+      <p><a href="{{ url_for('location_list') }}">Aktivní lokace</a></p>
+      <hr>
+
+      {% if message %}
+            <!-- the form was submitted and message exists -->
+            <p class="lead"><strong>{{ message }}</strong></p>
+            {% if item_status == False %}
+            <p><a href="{{ url_for('location_list', filters='inactive') }}">Zpět na seznam neaktivních lokací</a></p>
+            {% else %}
+	  		<p><a href="{{ url_for('location_list') }}">Zpět na seznam aktivních lokací</a></p>
+            {% endif %}
+
+      {% else %}
+            <!-- the form is displayed when template opens via GET not POST -->
+            <h4>{{ form1.submit.label }}</h4>
+            {% with errors = get_flashed_messages() %}
+            {% if errors %}
+            {% for err in errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                {{ err }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {{ wtf.quick_form(form1, button_map={'submit': 'primary'}) }}
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

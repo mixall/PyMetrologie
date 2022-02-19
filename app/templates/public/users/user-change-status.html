@@ -1,0 +1,36 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Uživatelé měřidel - změna stavu
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Uživatelé měřidel</h1>
+        {% if item.status == True %}
+            <p><a href="{{ url_for('user_list') }}">Aktivní uživatelé (seznam)</a></p>
+            <hr>
+            <h4>Opravdu chcete deaktivovat uživatele <strong> {{ item.name }} </strong>?</h4>
+	  	{% else %}
+            <p><a href="{{ url_for('user_list', filters='inactive') }}">Neaktivní uživatelé (seznam)</a></p>
+            <hr>
+            <h4>Opravdu chcete aktivovat uživatele <strong> {{ item.name }} </strong>?</h4>
+	  	{% endif %}
+
+        <br>
+
+        <form action="/user/status/{{item_id}}" method="POST">
+        <button type="submit" class="btn btn-primary" name="choice" value="storno">Storno</button>
+        <button type="submit" class="btn btn-secondary" name="choice" value="change_status">Ano</button>
+
+        {% if zpetnavazba %}
+          <p class="text-danger float-right">{{ zpetnavazba }}</p>
+        {% endif %}
+        </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

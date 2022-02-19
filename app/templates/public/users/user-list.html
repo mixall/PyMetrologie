@@ -1,0 +1,27 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Uživatelé měřidel - seznam
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Uživatelé měřidel</h1>
+        <p><a href="{{ url_for('user_add') }}">Nový uživatel</a></p>
+        {% if status == False %}
+            <p><a href="{{ url_for('user_list') }}">Aktivní uživatelé (seznam)</a></p>
+            <hr>
+            <h4>Seznam neaktivních uživatelů měřidel</h4>
+	  	{% else %}
+	  		<p><a href="{{ url_for('user_list', filters='inactive')}}">Neaktivní uživatelé (seznam)</a></p>
+            <hr>
+            <h4>Seznam aktivních uživatelů měřidel</h4>
+	  	{% endif %}
+
+      {{ table }}
+    </div>
+  </div>
+</div>
+{% endblock %}

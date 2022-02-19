@@ -1,0 +1,11 @@
+body {
+    background-color: #f1f1f1;
+}
+p.help-block {
+  color: red;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #d3d3d3;
+    opacity: 1;
+}

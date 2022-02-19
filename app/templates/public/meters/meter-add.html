@@ -1,0 +1,63 @@
+{% extends "public/templates/public_template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Měřidlo - nové měřidlo
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Měřidla</h1>
+            <p><a href="{{ url_for('meter_add') }}">Nové měřidlo</a></p>
+            <p><a href="{{ url_for('meter_list') }}">Aktivní měřidlo (seznam)</a></p>
+            <hr>
+
+            {% if message %}
+            <!-- the form was submitted and message exists -->
+            <p class="lead"><strong>{{ message }}</strong></p>
+            {% if item_status == False %}
+            <p><a href="{{ url_for('meter_list', filters='inactive') }}">Zpět na seznam neaktivních měřidel</a></p>
+            {% else %}
+	  		<p><a href="{{ url_for('meter_list') }}">Zpět na seznam aktivních měřidel</a></p>
+            {% endif %}
+
+            {% else %}
+            <!-- the form is displayed when template opens via GET not POST -->
+            <h4>{{ form1.submit.label }}</h4>
+            {% with errors = get_flashed_messages() %}
+            {% if errors %}
+            {% for err in errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                {{ err }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {{ wtf.quick_form(form1, button_map={'submit': 'primary'}) }}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+function doStuff(){
+  var checked = document.getElementById('home_dev_status').checked
+  if (checked){
+    document.getElementById('home_dev_id').disabled = false
+    document.getElementById('home_dev_id').readonly = true
+  } else {
+    document.getElementById('home_dev_id').disabled = true
+    document.getElementById('home_dev_id').readonly = false
+  }
+}
+doStuff()
+</script>
+
+
+{% endblock %}

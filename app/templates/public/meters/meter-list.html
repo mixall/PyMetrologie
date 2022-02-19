@@ -1,0 +1,27 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Měřidla - seznam
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Měřidla</h1>
+        <p><a href="{{ url_for('meter_add') }}">Nové měřidlo</a></p>
+        {% if status == False %}
+            <p><a href="{{ url_for('meter_list') }}">Aktivní měřidla (seznam)</a></p>
+            <hr>
+            <h4>Seznam neaktivních měřidel</h4>
+	  	{% else %}
+	  		<p><a href="{{ url_for('meter_list', filters='inactive')}}">Neaktivní měřidla (seznam)</a></p>
+            <hr>
+            <h4>Seznam aktivních měřidel</h4>
+	  	{% endif %}
+
+      {{ table }}
+    </div>
+  </div>
+</div>
+{% endblock %}

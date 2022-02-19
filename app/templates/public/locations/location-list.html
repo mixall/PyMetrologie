@@ -1,0 +1,27 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}
+Lokace - seznam
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Lokace měřidel</h1>
+        <p><a href="{{ url_for('location_add') }}">Nová lokace</a></p>
+        {% if status == False %}
+            <p><a href="{{ url_for('location_list') }}">Aktivní lokace (seznam)</a></p>
+            <hr>
+            <h4>Seznam neaktivních lokací měřidel</h4>
+	  	{% else %}
+	  		<p><a href="{{ url_for('location_list', filters='inactive')}}">Neaktivní lokace (seznam)</a></p>
+            <hr>
+            <h4>Seznam aktivních lokací měřidel</h4>
+	  	{% endif %}
+
+      {{ table }}
+    </div>
+  </div>
+</div>
+{% endblock %}
